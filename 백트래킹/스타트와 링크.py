@@ -1,18 +1,31 @@
-from sys import maxsize
-from itertools import combinations
+import sys
+
+input = sys.stdin.readline
+
+def dfs(idx, cnt):
+    global ans
+    if cnt == n // 2:
+        start, link = 0, 0
+        for i in range(n):
+            for j in range(n):
+                if select[i] and select[j]:
+                    start += a[i][j]
+                elif not select[i] and not select[j]:
+                    link += a[i][j]
+        ans = min(ans, abs(start - link))
+
+    for i in range(idx, n):
+        if select[i]:
+            continue
+        select[i] = 1
+        dfs(i + 1, cnt + 1)
+        select[i] = 0
+
+
 n = int(input())
-s = [list(map(int, input().split())) for _ in range(n)]
-cb = combinations(range(n), n//2)
-ans = maxsize
-for c in cb:
-    a = set(c)
-    b = list(set(range(n)) - a)
-    print(a,b)
-    a = list(a)
-    a_teamwork, b_teamwork = 0, 0
-    for i in range(n//2 - 1):
-        for j in range(i + 1, n//2):
-            a_teamwork += s[a[i]][a[j]] + s[a[j]][a[i]]
-            b_teamwork += s[b[i]][b[j]] + s[b[j]][b[i]]
-    ans = min(ans, abs(b_teamwork - a_teamwork))
+a = [list(map(int, input().split())) for _ in range(n)]
+
+select = [0 for _ in range(n)]
+ans = sys.maxsize
+dfs(0, 0)
 print(ans)
