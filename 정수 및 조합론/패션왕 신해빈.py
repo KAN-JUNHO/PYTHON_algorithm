@@ -1,16 +1,15 @@
 from collections import Counter
 
-n=int(input())
+n = int(input())
 
 for i in range(n):
-    m=int(input())
-    cloth=[]
-    for j in range(m):
-        a=list(map(str,input().split()))
-        cloth.append(a[1])
+    box = []
+    for j in range(int(input())):
+        a,b=map(str,input().split())
+        box.append(b)
+    cnt = Counter(box)
+    v=1
+    for j in cnt.values():
+        v*=(j+1)
+    print(v-1)
 
-    result=Counter(cloth)
-    num=1
-    for i in result:
-        num *= result[i] + 1
-    print(num - 1)
