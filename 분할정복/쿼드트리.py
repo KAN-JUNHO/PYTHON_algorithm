@@ -1,19 +1,20 @@
 n=int(input())
-box=[]
-for i in range(n):
-    box.append(list(map(int,str(input()))))
+box=[list(map(int,str(input()))) for i in range(n)]
+white=0
+black=0
 answer=""
-def conquer(y,x,n):
+def conquer(y, x, n):
     global answer
     for i in range(y,y+n):
         for j in range(x,x+n):
-            if box[y][x]!=box[i][j]:
+            if box[y][x] != box[i][j]:
+                k=n//2
                 answer+="("
-                conquer(y,x,n//2)
-                conquer(y,x+n//2,n//2)
-                conquer(y + n // 2, x, n // 2)
-                conquer(y + n // 2, x+n//2, n // 2)
-                answer += ")"
+                conquer(y,x,k)
+                conquer(y,x+k,k)
+                conquer(y+k,x,k)
+                conquer(y+k,x+k,k)
+                answer+=")"
                 return
 
     if box[y][x]==1:
