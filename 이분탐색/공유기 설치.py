@@ -1,29 +1,27 @@
-m,n = map(int,input().split())
-house = [int(input()) for i in range(m)]
-house.sort()
+n,c= map(int,input().split())
+box=[int(input()) for i in range(n)]
+box.sort()
+print(box)
+left = 1
+right = box[-1]-box[0]
 
-left=1
-right=house[-1]-house[0]
-answer=0
-def house_cnt(dis):
-    cur_house = house[0]
-    cnt=1
-    for i in range(1,m):
-        if cur_house+dis <= house[i]:
-            cnt+=1
-            cur_house=house[i]
-    return cnt
-def binary(left,right):
+def cnt(mid):
+    count=1
+    cur_=box[0]
+    for i in range(1,n):
+        if cur_+mid <= box[i]:
+            count+=1
+            cur_=box[i]
+    return count
+def binary(mi,ma):
     global answer
-    mid = (left+right)//2
-    if right<left:
+    if ma< mi:
         return answer
-
-    if house_cnt(mid) >= n:
+    mid = (mi+ma)//2
+    if cnt(mid)>=c:
         answer=mid
-        return binary(mid+1,right)
+        return binary(mid+1,ma)
     else:
-        return binary(left,mid-1)
-
+        return binary(mi,mid-1)
 
 print(binary(left,right))
