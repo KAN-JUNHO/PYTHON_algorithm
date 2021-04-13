@@ -1,23 +1,26 @@
-n=int(input())
+n = int(input())
 box=[]
-arr=[]
+num=[]
+cnt=0
 for i in range(1,n+1):
+    num.append(int(input()))
     box.append(i)
-    arr.append(int(input()))
+check=True
+ans=[]
 stack=[]
-
-ans =[]
-while len(arr)!=0:
-    while (stack and arr and arr[0]==stack[-1]) or (box[0]!=arr[0]):
-
-        if stack and arr and arr[0]==stack[-1]:
-            print("-")
-            ans.append(stack.pop())
-            arr.pop(0)
-        elif box[0]!=arr[0]:
-            print("+")
-            stack.append(box.pop(0))
+for i in range(n):
+    while box and num[0]>=box[0]:
+        stack.append(box.pop(0))
+        ans.append("+")
+    if num and num[0]==stack[-1]:
+        stack.pop()
+        num.pop(0)
+        ans.append("-")
     else:
-        ans.append(box[0])
-        box.pop(0)
-        arr.pop(0)
+        check=False
+        break
+if check==False:
+    print("NO")
+else:
+    for i in ans:
+        print(i)

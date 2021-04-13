@@ -16,7 +16,7 @@ def conquer(y,x,n):
                 conquer(y+(2*k),x,k)
                 conquer(y + (2 * k), x+k, k)
                 conquer(y + (2 * k), (x+2*k), k)
-                return
+                return 
     if box[y][x]==-1:
         minuse+=1
     elif box[y][x]==0:
