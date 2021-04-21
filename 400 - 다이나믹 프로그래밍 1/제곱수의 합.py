@@ -1,10 +1,11 @@
-n=int(input())
-dp=[0]*(n+1)
+import sys
+n=int(sys.stdin.readline())
+dp=[i for i in range(n+1)]
 
 for i in range(1,n+1):
-    dp[i]=i
     for j in range(1,i):
-        if i<j**2:
+        if i<j*j:
             break
-        dp[i]=min(dp[i],dp[i-j**2]+1)
-print(dp)
+        dp[i]=min(dp[i],dp[i-j*j]+1)
+
+print(dp[n])

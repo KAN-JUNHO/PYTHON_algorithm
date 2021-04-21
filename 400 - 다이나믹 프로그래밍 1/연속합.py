@@ -1,8 +1,6 @@
 n=int(input())
-box = list(map(int,input().split()))
+a=list(map(int,input().split()))
 dp=[0]*n
-
 for i in range(n):
-    dp[i]=max(box[i],dp[i-1]+box[i])
-
+    dp[i]=max(a[i],dp[i-1]+a[i])
 print(max(dp))
