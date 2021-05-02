@@ -1,24 +1,27 @@
 import sys
-sys.setrecursionlimit(10000)
-dx = [1, -1, 0, 0, 1, -1, 1, -1]
-dy = [0, 0, -1, 1, -1, -1, 1, 1]
-def dfs(y,x):
+sys.setrecursionlimit(100000)
+def dfs(x,y):
     land[y][x]="#"
+
     for i in range(8):
-        ny=y+dy[i]
-        nx=x+dx[i]
-        if 0<=ny<h and 0<=nx<w and land[ny][nx]==1:
-            dfs(ny,nx)
+        ndy=dy[i]+y
+        ndx=dx[i]+x
+        if 0<=ndy<h and 0<=ndx<w and land[ndy][ndx]==1:
+            dfs(ndx,ndy)
+
 while True:
     w,h = map(int,input().split())
     if w==0 and h==0:
         break
     land = [list(map(int,input().split())) for i in range(h)]
+    dx=[-1,0,1,-1,1,-1,0,1]
+    dy=[-1,-1,-1,0,0,1,1,1]
     cnt=0
     for i in range(h):
         for j in range(w):
             if land[i][j]==1:
-                dfs(i,j)
+                dfs(j,i)
                 cnt+=1
+
 
     print(cnt)
