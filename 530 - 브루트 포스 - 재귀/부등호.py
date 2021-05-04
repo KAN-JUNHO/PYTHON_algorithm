@@ -9,11 +9,12 @@ def dfs(pos, ans):
         max_val=max(max_val,ans)
         return
     for i in range(10):
-        if not check[i]:
-            if pos==0 or eval(ans[-1]+box[pos-1]+str(i)):
-                check[i]=True
-                dfs(pos+1,ans+str(i))
-                check[i]=False
+        if check[i]:
+            continue
+        if pos==0 or eval(ans[-1]+box[pos-1]+str(i)):
+            check[i]=True
+            dfs(pos+1,ans+str(i))
+            check[i]=False
 
 dfs(0,"")
 print(max_val)

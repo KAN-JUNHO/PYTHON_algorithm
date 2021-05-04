@@ -1,29 +1,43 @@
+import collections
+import sys
+sys.setrecursionlimit(100000)
 t=int(input())
-def dfs(x,cnt):
-    if check[x]:
-        if cnt-dist[x]>=3:
-           return x
-        else:
-            return -1
-    check[x]=1
-    dist[x]=cnt
-    for i in station[x]:
-        cycle = dfs(i,cnt+1)
-        if cycle != -1:
-            check[x]=2
-            if x==cycle:
-                return -1
+station = [[] for i in range(t)]
+cycle=False
+iscycle = [False]*t
+check = [-1]*t
 
-    return -1
-
-
-station = [[] * (t+1)for i in range(t+1)]
-check = [0] * (t + 1)
-dist = [0] * (t + 1)
+def dfs(cur,start, cnt):
+    global cycle
+    if cur==start and cnt>=2:
+        cycle=True
+        return
+    visit[cur] = True
+    for n in station[cur]:
+        if not visit[n]:
+            dfs(n,start,cnt+1)
+        elif n==start and cnt>=2:
+            dfs(n,start,cnt)
 for i in range(t):
-    u, v = map(int, input().split())
-    station[v].append(u)
-    station[u].append(v)
-print(station)
-dfs(1,0)
-print(check)
+    a,b = map(int,input().split())
+    station[a-1].append(b-1)
+    station[b-1].append(a-1)
+
+for i in range(t):
+    visit = [False] * t
+    cycle=False
+    dfs(i,i,0)
+    if cycle:
+        iscycle[i]=True
+q= collections.deque()
+for i in range(t):
+    if iscycle[i]:
+        check[i]=0
+        q.append(i)
+while q:
+    cur =  q.popleft()
+    for i in station[cur]:
+        if check[i]==-1:
+            q.append(i)
+            check[i] = check[cur]+1
+print(*check)
