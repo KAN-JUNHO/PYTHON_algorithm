@@ -1,18 +1,16 @@
-n,s = map(int,input().split())
+n,s=map(int,input().split())
 box=list(map(int,input().split()))
+ans=[]
 cnt=0
-def dfs(idx,hap):
+def solve(idx,hap):
     global cnt
-    if idx>=n:
-        if s==hap:
-            cnt+=1
-            return
-    else:
-        dfs(idx+1,hap+box[idx])
-        dfs(idx+1,hap)
+    if n==idx:
+        return
+    hap+=box[idx]
+    if hap==s:
+        cnt+=1
+    solve(idx+1,hap)
+    solve(idx+1,hap-box[idx])
 
-dfs(0,0)
-if s!=0:
-    print(cnt)
-else:
-    print(cnt-1)
+solve(0,0)
+print(cnt)
