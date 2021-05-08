@@ -1,12 +1,10 @@
-n,k = map(int,input().split())
-nums = [i for i in range(1,n+1)]
-stack=[]
-i=k-1
-while nums:
-    if len(nums)-1 < i:
-        i=i-len(nums)
-    else:
-        stack.append(nums[i])
-        del nums[i]
-        i+=k-1
-print("<%s>" % (", ".join(map(str,stack))))
+n,k=map(int,input().split())
+box=[i for i in range(1,n+1)]
+ans=[]
+i=0
+while box:
+    i+=k-1
+    while i>len(box)-1:
+       i=i-len(box)
+    ans.append(str(box.pop(i)))
+print("<",", ".join(ans),">",sep='')
