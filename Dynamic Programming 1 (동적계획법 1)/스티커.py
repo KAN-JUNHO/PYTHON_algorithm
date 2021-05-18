@@ -10,4 +10,5 @@ for i in range(t):
     for j in range(2,n):
         stiker[0][j]+=max(stiker[1][j-2],stiker[1][j-1])
         stiker[1][j]+=max(stiker[0][j-2],stiker[0][j-1])
+
     print(max(stiker[0][-1],stiker[1][-1]))
