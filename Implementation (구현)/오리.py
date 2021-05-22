@@ -1,34 +1,29 @@
-duck = input()
-visited = [False] * len(duck)
-cnt = 0
-
+duck=input()
 if len(duck) % 5 != 0:
     print(-1)
     exit()
-
-
-def solve(start):
+def solve(index):
     global cnt
-    quack="quack"
+    start=True
+    quack = "quack"
     j=0
-    first=True
-    for i in range(start,len(duck)):
-        if duck[i]==quack[j] and not visited[i]:
-            visited[i]=True
+    for i in range(index,len(duck)):
+        if quack[j]==duck[i] and not check[i]:
+            check[i]=True
             if duck[i]=="k":
-                if first:
+                if start:
                     cnt+=1
-                    first=False
+                    start=False
                 j=0
                 continue
             j+=1
-
+check=[False]*len(duck)
+cnt=0
 for i in range(len(duck)):
-    if duck[i] == 'q' and not visited[i]:
+    if duck[i]=="q" and check[i]==False:
         solve(i)
 
-if not all(visited) or cnt == 0:
+if cnt==0 or not all(check):
     print(-1)
 else:
     print(cnt)
-
