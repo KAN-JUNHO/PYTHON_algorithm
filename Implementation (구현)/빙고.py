@@ -21,9 +21,9 @@ def bingo_game():
     for i in range(5):
         line_up.append(check[i][i])
         line_down.append(check[i][4-i])
-    if all(line_up):
-        line_up[0]=True
     if all(line_down):
+        line_up[0]=True
+    if all(line_up):
         line_down[1]=True
 
 def bingo_cnt():
@@ -38,6 +38,7 @@ def bingo_cnt():
             cnt+=1
     return cnt
 for j in range(len(target)):
+    x=None
     for i in range(5):
         if target[j] in bingo[i]:
             x=i
@@ -46,6 +47,6 @@ for j in range(len(target)):
 
     check[x][y]=True
     bingo_game()
-    if bingo_cnt()>2:
+    if bingo_cnt()>=3:
         print(j+1)
         break
