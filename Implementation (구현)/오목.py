@@ -1,31 +1,33 @@
 n=19
 board=[list(map(int,input().split())) for i in range(n)]
-white=[[False]*n for _ in range(n)]
-black=[[False]*n for _ in range(n)]
-
-def omok(y,x):
-    b_c=[]
-    w_c=[]
-    b_r=[]
-    w_r=[]
-    for i in range(5):
-        if board[y+i][x]:
-            b_r.append(black[y+i][x])
-            w_r.append(white[y+i][x])
-
-        elif board[y][x+i]:
-            b_c.append(black[y][x+i])
-            w_c.append(white[y][x+i])
-    if all(b_r) or all(b_c):
-        return black[y][x]
-    elif all(w_r):
-        return white[y][x]
-
-for i in range(n):
+dx=[0,1,1,1]
+dy=[1,0,1,-1]
+def mok():
     for j in range(n):
-        if board[i][j]==1:
-            black[i][j]=True
-        elif black[i][j]==2:
-            white[i][j]=True
+        for i in range(n):
+            if board[j][i]:
+                for k in range(4):
+                    move_y = j
+                    move_x = i
+                    cnt = 1
+                    while 0<=move_y+dy[k]<n and 0<=move_x+dx[k]<n and (board[j][i]==board[move_y+dy[k]][move_x+dx[k]]):
+                        move_y += dy[k]
+                        move_x += dx[k]
+                        cnt+=1
+                    if cnt==5:
+                        move_y=j
+                        move_x=i
+                        if 0<=move_y-dy[k]<n and 0<=move_x-dx[k]<n and board[j][i]==board[move_y-dy[k]][move_x-dx[k]]:
+                            break
+                        else:
+                            return board[j][i],j+1,i+1
+    else:
+        return 0,-1,-1
+c,y,x=mok()
+if c==0:
+    print(0)
+else:
+    print(c)
+    print(y,x)
 
-        omok[i][j]
+
