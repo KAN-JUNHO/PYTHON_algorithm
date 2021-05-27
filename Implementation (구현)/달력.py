@@ -6,14 +6,13 @@ for _ in range(n):
         box[i]+=1
 h=0
 w=0
-ans=0
+hap=0
 for i in range(366):
-    if box[i]!=0:
+    if box[i]==0:
+        hap+=w*h
+        w=h=0
+    else:
         h=max(h,box[i])
         w+=1
-    else:
-        ans+=h*w
-        h=0
-        w=0
-ans+= h*w
-print(ans)
+hap+=h*w
+print(hap)
