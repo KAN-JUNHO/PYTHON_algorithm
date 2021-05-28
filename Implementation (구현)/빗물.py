@@ -1,9 +1,10 @@
 h,w=map(int,input().split())
-box=list(map(int,input().split()))
-ans=0
-for i in range(len(box)):
-    max_left=max(box[:i+1])
-    max_right=max(box[i:])
-    choice=min(max_left,max_right)
-    ans+=abs(choice-box[i])
-print(ans)
+block=list(map(int,input().split()))
+hap=0
+for i in range(1,w-1):
+    left=max(block[:i])
+    right=max(block[i+1:])
+    val=min(left,right)
+    if val>=block[i]:
+        hap+=val-block[i]
+print(hap)
