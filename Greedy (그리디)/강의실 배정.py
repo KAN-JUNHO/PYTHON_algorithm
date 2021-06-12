@@ -3,17 +3,13 @@ import sys
 
 N = int(input())
 
-timeTable = [list(map(int,sys.stdin.readline().split())) for _ in range(N)]
-timeTable.sort(key=lambda x: x[0])
+box = [list(map(int,sys.stdin.readline().split())) for _ in range(N)]
+box.sort()
+ans=[]
 
-queue = []
-heapq.heappush(queue,timeTable[0][1])
+for i in range(N):
+    if ans and ans[0] <= box[i][0]:
+        heapq.heappop(ans)
+    heapq.heappush(ans,box[i][1])
 
-for i in range(1,N):
-    if queue[0] > timeTable[i][0]:
-        heapq.heappush(queue,timeTable[i][1])
-    else:
-        heapq.heappop(queue)
-        heapq.heappush(queue,timeTable[i][1])
-
-print(len(queue))
+print(ans)
