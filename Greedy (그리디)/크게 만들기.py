@@ -8,4 +8,4 @@ for i in range(n):
         k-=1
     stack.append(num[i])
 
-print("".join(stack))
+print("".join(stack[:n-k]))
