@@ -1,8 +1,6 @@
 from collections import deque
 def solution(play_list, listen_time):
     answer = 0
-
-
     idx= play_list.index(max(play_list))+1
     if idx == len(play_list):
         idx=0
@@ -20,4 +18,4 @@ def solution(play_list, listen_time):
     print(cnt)
     return cnt
 
-solution([2, 3, 1, 100],7)
+solution([101, 100,3, 1, 100],7)
